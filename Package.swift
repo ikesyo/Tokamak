@@ -1,4 +1,4 @@
-// swift-tools-version:5.6
+// swift-tools-version:5.7
 
 import PackageDescription
 
@@ -27,14 +27,14 @@ let package = Package(
       name: "TokamakStaticHTMLDemo",
       targets: ["TokamakStaticHTMLDemo"]
     ),
-    .library(
-      name: "TokamakGTK",
-      targets: ["TokamakGTK"]
-    ),
-    .executable(
-      name: "TokamakGTKDemo",
-      targets: ["TokamakGTKDemo"]
-    ),
+    // .library(
+    //   name: "TokamakGTK",
+    //   targets: ["TokamakGTK"]
+    // ),
+    // .executable(
+    //   name: "TokamakGTKDemo",
+    //   targets: ["TokamakGTKDemo"]
+    // ),
     .library(
       name: "TokamakShim",
       targets: ["TokamakShim"]
@@ -47,11 +47,11 @@ let package = Package(
   dependencies: [
     .package(
       url: "https://github.com/swiftwasm/JavaScriptKit.git",
-      from: "0.15.0"
+      from: "0.19.1"
     ),
     .package(
       url: "https://github.com/OpenCombine/OpenCombine.git",
-      from: "0.12.0"
+      from: "0.14.0"
     ),
     .package(
       url: "https://github.com/swiftwasm/OpenCombineJS.git",
@@ -63,7 +63,7 @@ let package = Package(
     ),
     .package(
       url: "https://github.com/pointfreeco/swift-snapshot-testing.git",
-      from: "1.9.0"
+      from: "1.15.4"
     ),
   ],
   targets: [
@@ -84,7 +84,7 @@ let package = Package(
       name: "TokamakShim",
       dependencies: [
         .target(name: "TokamakDOM", condition: .when(platforms: [.wasi])),
-        .target(name: "TokamakGTK", condition: .when(platforms: [.linux])),
+        // .target(name: "TokamakGTK", condition: .when(platforms: [.linux])),
       ]
     ),
     .systemLibrary(
@@ -105,25 +105,25 @@ let package = Package(
         .brew(["gtk+3"]),
       ]
     ),
-    .target(
-      name: "TokamakGTKCHelpers",
-      dependencies: ["CGTK"]
-    ),
-    .target(
-      name: "TokamakGTK",
-      dependencies: [
-        "TokamakCore", "CGTK", "CGDK", "TokamakGTKCHelpers",
-        .product(
-          name: "OpenCombineShim",
-          package: "OpenCombine"
-        ),
-      ]
-    ),
-    .executableTarget(
-      name: "TokamakGTKDemo",
-      dependencies: ["TokamakGTK"],
-      resources: [.copy("logo-header.png")]
-    ),
+    // .target(
+    //   name: "TokamakGTKCHelpers",
+    //   dependencies: ["CGTK"]
+    // ),
+    // .target(
+    //   name: "TokamakGTK",
+    //   dependencies: [
+    //     "TokamakCore", "CGTK", "CGDK", "TokamakGTKCHelpers",
+    //     .product(
+    //       name: "OpenCombineShim",
+    //       package: "OpenCombine"
+    //     ),
+    //   ]
+    // ),
+    // .executableTarget(
+    //   name: "TokamakGTKDemo",
+    //   dependencies: ["TokamakGTK"],
+    //   resources: [.copy("logo-header.png")]
+    // ),
     .target(
       name: "TokamakStaticHTML",
       dependencies: [
