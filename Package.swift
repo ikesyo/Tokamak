@@ -27,14 +27,14 @@ let package = Package(
       name: "TokamakStaticHTMLDemo",
       targets: ["TokamakStaticHTMLDemo"]
     ),
-    .library(
-      name: "TokamakGTK",
-      targets: ["TokamakGTK"]
-    ),
-    .executable(
-      name: "TokamakGTKDemo",
-      targets: ["TokamakGTKDemo"]
-    ),
+    // .library(
+    //   name: "TokamakGTK",
+    //   targets: ["TokamakGTK"]
+    // ),
+    // .executable(
+    //   name: "TokamakGTKDemo",
+    //   targets: ["TokamakGTKDemo"]
+    // ),
     .library(
       name: "TokamakShim",
       targets: ["TokamakShim"]
@@ -84,7 +84,7 @@ let package = Package(
       name: "TokamakShim",
       dependencies: [
         .target(name: "TokamakDOM", condition: .when(platforms: [.wasi])),
-        .target(name: "TokamakGTK", condition: .when(platforms: [.linux])),
+        // .target(name: "TokamakGTK", condition: .when(platforms: [.linux])),
       ]
     ),
     .systemLibrary(
@@ -105,25 +105,25 @@ let package = Package(
         .brew(["gtk+3"]),
       ]
     ),
-    .target(
-      name: "TokamakGTKCHelpers",
-      dependencies: ["CGTK"]
-    ),
-    .target(
-      name: "TokamakGTK",
-      dependencies: [
-        "TokamakCore", "CGTK", "CGDK", "TokamakGTKCHelpers",
-        .product(
-          name: "OpenCombineShim",
-          package: "OpenCombine"
-        ),
-      ]
-    ),
-    .executableTarget(
-      name: "TokamakGTKDemo",
-      dependencies: ["TokamakGTK"],
-      resources: [.copy("logo-header.png")]
-    ),
+    // .target(
+    //   name: "TokamakGTKCHelpers",
+    //   dependencies: ["CGTK"]
+    // ),
+    // .target(
+    //   name: "TokamakGTK",
+    //   dependencies: [
+    //     "TokamakCore", "CGTK", "CGDK", "TokamakGTKCHelpers",
+    //     .product(
+    //       name: "OpenCombineShim",
+    //       package: "OpenCombine"
+    //     ),
+    //   ]
+    // ),
+    // .executableTarget(
+    //   name: "TokamakGTKDemo",
+    //   dependencies: ["TokamakGTK"],
+    //   resources: [.copy("logo-header.png")]
+    // ),
     .target(
       name: "TokamakStaticHTML",
       dependencies: [
